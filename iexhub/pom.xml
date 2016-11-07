@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>gov.samhsa.iexhub</groupId>
+    <artifactId>iexhub-generated</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>iexhub-generated</name>
+    <description>Temporary project to contain the generated code which was originally part of iexhub-fork, and to build
+        the generated code into an artifact which iexhub-fork can use as a Maven dependency.
+    </description>
+    <url>${project.scm.url}</url>
+
+    <organization>
+        <name>SAMHSA</name>
+        <url>http://www.samhsa.gov/</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>BHITS Team</id>
+            <name>BHITS Team</name>
+            <organization>FEi Systems</organization>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>See license in LICENSE</name>
+            <url>${project.scm.url}/blob/master/LICENSE</url>
+        </license>
+    </licenses>
+
+    <ciManagement>
+        <system>CI</system>
+        <url>http://BhitsBuild03/</url>
+    </ciManagement>
+
+    <scm>
+        <url>https://github.com/FEISystems/iexhub-generated</url>
+        <connection>scm:git:{project.scm.url}.git</connection>
+        <developerConnection>scm:git:${project.scm.url}.git</developerConnection>
+    </scm>
+
+    <!-- This configuration is for BHITS team to deploy the artifacts to organization repository with 'mvn deploy' command -->
+    <!-- Please reconfigure based on your environment setup to run 'mvn deploy' -->
+    <distributionManagement>
+        <repository>
+            <id>deployment</id>
+            <name>Internal Releases</name>
+            <url>http://${maven.nexus.servername}/repository/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>deployment</id>
+            <name>Internal Releases</name>
+            <url>http://${maven.nexus.servername}/repository/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.7</java.version>
+        <docker.maven.version>0.4.3</docker.maven.version>
+        <hapi.fhir.version>2.0</hapi.fhir.version>
+        <mdmi.version>1.0.0-SNAPSHOT</mdmi.version>
+        <apache.axiom.version>1.2.15</apache.axiom.version>
+        <apache.axis2.version>1.6.3</apache.axis2.version>
+        <apache.rampart.version>1.6.2</apache.rampart.version>
+        <jersey_version>2.22</jersey_version>
+        <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Maven Repository Switchboard</name>
+            <layout>default</layout>
+            <url>http://repo1.maven.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+
+        <!-- CDA Tools Release (Third Party) - Contains 3rd party jars not available
+            on other Maven repositories -->
+        <repository>
+            <id>cdatoolsrelease-ext</id>
+            <name>cdatools.com-releases-ext</name>
+            <url>http://www.cdatools.com:8081/artifactory/ext-release-local</url>
+        </repository>
+
+        <!-- CDA Tools Release - Contains release dependencies -->
+        <repository>
+            <id>cdatoolsrelease-libs</id>
+            <name>cdatools.com-releases-libs</name>
+            <url>http://www.cdatools.com:8081/artifactory/libs-release-local</url>
+        </repository>
+
+        <!-- CDA Snapshot, Contains the latest stable build of cda plugins (consol,hitsp,etc) -->
+        <repository>
+            <id>cdatoolssnapshot</id>
+            <name>cdatools.com-releases</name>
+            <url>http://www.cdatools.com:8081/artifactory/libs-snapshot-local</url>
+        </repository>
+
+        <repository>
+            <id>EclipseLink Repo</id>
+            <url>http://www.eclipse.org/downloads/download.php?r=1&amp;nf=1&amp;file=/rt/eclipselink/maven.repo</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <!-- Rampart Dependency -->
+        <dependency>
+            <groupId>org.apache.rampart</groupId>
+            <artifactId>rampart</artifactId>
+            <version>${apache.rampart.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.xalan</groupId>
+                    <artifactId>xalan</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.xerces</groupId>
+                    <artifactId>xercesImpl</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>opensaml</groupId>
+                    <artifactId>opensaml</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.rampart</groupId>
+            <artifactId>rampart-core</artifactId>
+            <version>${apache.rampart.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.xalan</groupId>
+                    <artifactId>xalan</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.xerces</groupId>
+                    <artifactId>xercesImpl</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>opensaml</groupId>
+                    <artifactId>opensaml</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.rampart</groupId>
+            <artifactId>rampart-policy</artifactId>
+            <version>${apache.rampart.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.xalan</groupId>
+                    <artifactId>xalan</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.xerces</groupId>
+                    <artifactId>xercesImpl</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>opensaml</groupId>
+                    <artifactId>opensaml</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.rampart</groupId>
+            <artifactId>rampart-trust</artifactId>
+            <version>${apache.rampart.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.xalan</groupId>
+                    <artifactId>xalan</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.xerces</groupId>
+                    <artifactId>xercesImpl</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>opensaml</groupId>
+                    <artifactId>opensaml</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.owasp.esapi</groupId>
+            <artifactId>esapi</artifactId>
+            <version>2.1.0</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>xml-apis</artifactId>
+                    <groupId>xml-apis</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.apache.axis2</groupId>
+                            <artifactId>axis2-jaxbri</artifactId>
+                            <version>${apache.axis2.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.axis2</groupId>
+                    <artifactId>axis2-mar-maven-plugin</artifactId>
+                    <version>${apache.axis2.version}</version>
+                    <extensions>true</extensions>
+                </plugin>
+                <plugin>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>${docker.maven.version}</version>
+                    <configuration>
+                        <imageName>bhits/${project.artifactId}</imageName>
+                        <dockerDirectory>src/main/docker</dockerDirectory>
+                        <buildArgs>
+                            <finalName>${project.build.finalName}.war</finalName>
+                        </buildArgs>
+                        <resources>
+                            <resource>
+                                <targetPath>/</targetPath>
+                                <directory>${project.build.directory}</directory>
+                                <include>${project.build.finalName}.war</include>
+                            </resource>
+                        </resources>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

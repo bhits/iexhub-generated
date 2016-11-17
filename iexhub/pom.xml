@@ -64,13 +64,10 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.7</java.version>
-        <docker.maven.version>0.4.3</docker.maven.version>
-        <hapi.fhir.version>2.0</hapi.fhir.version>
+        <docker-maven-plugin.version>0.4.3</docker-maven-plugin.version>
         <mdmi.version>1.0.0-SNAPSHOT</mdmi.version>
-        <apache.axiom.version>1.2.15</apache.axiom.version>
-        <apache.axis2.version>1.6.3</apache.axis2.version>
-        <apache.rampart.version>1.6.2</apache.rampart.version>
-        <jersey_version>2.22</jersey_version>
+        <axis2.version>1.6.3</axis2.version>
+        <rampart.version>1.6.2</rampart.version>
         <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
     </properties>
 
@@ -121,7 +118,7 @@
         <dependency>
             <groupId>org.apache.rampart</groupId>
             <artifactId>rampart</artifactId>
-            <version>${apache.rampart.version}</version>
+            <version>${rampart.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.xalan</groupId>
@@ -140,7 +137,7 @@
         <dependency>
             <groupId>org.apache.rampart</groupId>
             <artifactId>rampart-core</artifactId>
-            <version>${apache.rampart.version}</version>
+            <version>${rampart.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.xalan</groupId>
@@ -159,7 +156,7 @@
         <dependency>
             <groupId>org.apache.rampart</groupId>
             <artifactId>rampart-policy</artifactId>
-            <version>${apache.rampart.version}</version>
+            <version>${rampart.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.xalan</groupId>
@@ -178,7 +175,7 @@
         <dependency>
             <groupId>org.apache.rampart</groupId>
             <artifactId>rampart-trust</artifactId>
-            <version>${apache.rampart.version}</version>
+            <version>${rampart.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.xalan</groupId>
@@ -226,7 +223,7 @@
                         <dependency>
                             <groupId>org.apache.axis2</groupId>
                             <artifactId>axis2-jaxbri</artifactId>
-                            <version>${apache.axis2.version}</version>
+                            <version>${axis2.version}</version>
                         </dependency>
                     </dependencies>
                 </plugin>
@@ -234,13 +231,13 @@
                 <plugin>
                     <groupId>org.apache.axis2</groupId>
                     <artifactId>axis2-mar-maven-plugin</artifactId>
-                    <version>${apache.axis2.version}</version>
+                    <version>${axis2.version}</version>
                     <extensions>true</extensions>
                 </plugin>
                 <plugin>
                     <groupId>com.spotify</groupId>
                     <artifactId>docker-maven-plugin</artifactId>
-                    <version>${docker.maven.version}</version>
+                    <version>${docker-maven-plugin.version}</version>
                     <configuration>
                         <imageName>bhits/${project.artifactId}</imageName>
                         <dockerDirectory>src/main/docker</dockerDirectory>

@@ -114,6 +114,12 @@
     </repositories>
 
     <dependencies>
+        <dependency>
+            <groupId>org.apache.axis2</groupId>
+            <artifactId>axis2</artifactId>
+            <version>${axis2.version}</version>
+        </dependency>
+
         <!-- Rampart Dependency -->
         <dependency>
             <groupId>org.apache.rampart</groupId>

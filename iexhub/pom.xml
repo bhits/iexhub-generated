@@ -49,8 +49,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.7</java.version>
-        <docker-maven-plugin.version>0.4.3</docker-maven-plugin.version>
-        <mdmi.version>1.0.0-SNAPSHOT</mdmi.version>
         <axis2.version>1.6.3</axis2.version>
         <rampart.version>1.6.2</rampart.version>
         <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
